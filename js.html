@@ -1,0 +1,55 @@
+<html>
+  <head>
+      <title>
+        </title>
+    </head>
+    <body>
+      <span id="fo">
+        Heleu
+      </span>
+        <script type="text/javascript">
+          function kokeilu() {
+            function Sample(msg) {
+              this.message = msg;
+            }
+            Sample.prototype.message = 'hei';
+            var a = new Sample('foo');
+            Sample.prototype.bar = 'yuu';
+            Sample.prototype.message = 'hei';
+            alert(a.bar);
+          }
+
+
+
+          function sampleNS() {
+            function Sample(msg) {
+              this.message = msg;
+            }
+
+            Sample.prototype = new Object();
+            Sample.prototype.message = 'hei';
+            Sample.prototype.itClicked = function() {
+              alert(this.message);
+            }
+            var a = new Sample('clilick');
+            //document.getElementById('fo').addEventListener('click', a.itClicked, false);
+            alert(a.itClicked);
+
+            document.getElementById('fo').addEventListener('click', 
+                function () {
+                Sample.prototype.itClicked.apply(a, arguments)
+                }, false);
+          }
+
+          function scopeTest() {
+            var a = new Object();
+            a.msg = 'barfoo';
+            a.foo = function () { alert(this.msg); }
+            document.getElementById('fo').msg = 'barbar';
+            document.getElementById('fo').addEventListener('click', a.foo, false);
+          }
+
+          scopeTest();
+        </script>
+    </body>
+</html>

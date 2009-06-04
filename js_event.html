@@ -1,0 +1,20 @@
+
+<html>
+  <head>
+      <title>
+        </title>
+    </head>
+    <body>
+        <script type="text/javascript">
+          function eventing() {
+            function foo() {
+              alert('done');
+            }
+            //function foo.prototype = new EventDispatcher;
+            bar = new foo();
+          }
+
+          eventing();
+        </script>
+    </body>
+</html>

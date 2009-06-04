@@ -1,0 +1,68 @@
+<html>
+  <head>
+      <title>
+        </title>
+    </head>
+    <body>
+        <script type="text/javascript">
+          function subclassing() {
+
+            function fatherClass() {
+              this.id = 'It is me, I am your father.';
+              refToThis = this;
+              fatherClass.prototype.getId = function() {
+                return refToThis.id;
+              }
+            }
+
+            function kiddyClass() {
+              this.id = 'kid';
+              kidRef = this;
+
+              kiddyClass.prototype.doKidStuff = function() {
+                return 'I is the kid.';
+              }
+              
+              kiddyClass.prototype.getId = function() {
+                return 'Overrided the fool daddy.';
+              }
+
+              kiddyClass.prototype.getRefId = function () {
+                // This is the father.
+                return refToThis.getId();
+              }
+              kiddyClass.prototype.getKidId = function () {
+                return this.id;
+              }
+              kiddyClass.prototype.whatId = function () {
+                this.id = 'kid changed';
+                return this.id;
+              }
+              kiddyClass.prototype.theIdAgain = function () {
+                return this.id;
+              }
+              kiddyClass.prototype.idChangedGetRef = function () {
+                return kidRef.id;
+              }
+              kiddyClass.prototype.whatId();
+              alert('hmm ' + this.id);
+            }
+            kiddyClass.prototype = new fatherClass;
+
+            var dad = new fatherClass();
+            //alert(dad.getId());
+            var kid = new kiddyClass();
+            //alert(kid.getId());
+            //alert(kid.doKidStuff());
+            //alert(kid.getRefId());
+            //alert(kid.getKidId());
+            alert(kid.whatId());
+            alert(kid.theIdAgain());
+            alert(kid.id);
+            alert(kid.idChangedGetRef());
+          }
+
+          subclassing();
+        </script>
+    </body>
+</html>
